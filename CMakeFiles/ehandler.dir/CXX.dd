@@ -1,0 +1,5 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/ehandler.dir/main.cpp.o: dyndep
+
+build CMakeFiles/ehandler.dir/EventHandler/eHandler.cpp.o: dyndep
+

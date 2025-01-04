@@ -1,0 +1,3 @@
+/home/denis/GITEvent/mtEventHandler/CMakeFiles/ehandler.dir
+/home/denis/GITEvent/mtEventHandler/CMakeFiles/edit_cache.dir
+/home/denis/GITEvent/mtEventHandler/CMakeFiles/rebuild_cache.dir

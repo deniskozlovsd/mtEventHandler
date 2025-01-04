@@ -1,0 +1,78 @@
+==28665== Memcheck, a memory error detector
+==28665== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==28665== Using Valgrind-3.23.0-c54d316124-20240426 and LibVEX; rerun with -h for copyright info
+==28665== Command: ./ehandler
+==28665== Parent PID: 19559
+==28665== 
+--28665-- 
+--28665-- Valgrind options:
+--28665--    --leak-check=full
+--28665--    --show-leak-kinds=all
+--28665--    --track-origins=yes
+--28665--    --verbose
+--28665--    --log-file=valgrind-out.txt
+--28665-- Contents of /proc/version:
+--28665--   Linux version 6.11.0-13-generic (buildd@bos03-arm64-024) (aarch64-linux-gnu-gcc-14 (Ubuntu 14.2.0-4ubuntu2) 14.2.0, GNU ld (GNU Binutils for Ubuntu) 2.43.1) #14-Ubuntu SMP PREEMPT_DYNAMIC Sun Dec  1 00:22:04 UTC 2024
+--28665-- 
+--28665-- Arch and hwcaps: ARM64, LittleEndian, v8-fhm-dpbcvadp-sha3-rdm-atomics-fp16-vfp16
+--28665-- Page sizes: currently 4096, max supported 65536
+--28665-- Valgrind library directory: /usr/libexec/valgrind
+--28665-- Reading syms from /home/denis/GITEvent/mtEventHandler/ehandler
+--28665-- Reading syms from /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+--28665--   Considering /usr/lib/debug/.build-id/87/f56b6017f1c24ff66cafa216127c8b154799bd.debug ..
+--28665--   .. build-id is valid
+--28665-- Reading syms from /usr/libexec/valgrind/memcheck-arm64-linux
+--28665--    object doesn't have a dynamic symbol table
+--28665-- Scheduler: using generic scheduler lock implementation.
+--28665-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==28665== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-28665-by-denis-on-???
+==28665== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-28665-by-denis-on-???
+==28665== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-28665-by-denis-on-???
+==28665== 
+==28665== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==28665== don't want to do, unless you know exactly what you're doing,
+==28665== or are doing some strange experiment):
+==28665==   /usr/bin/vgdb --pid=28665 ...command...
+==28665== 
+==28665== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==28665==   /path/to/gdb ./ehandler
+==28665== and then give GDB the following command
+==28665==   target remote | /usr/bin/vgdb --pid=28665
+==28665== --pid is optional if only one valgrind process is running
+==28665== 
+--28665-- REDIR: 0x401d280 (ld-linux-aarch64.so.1:strlen) redirected to 0x580c4a30 (???)
+--28665-- REDIR: 0x401c780 (ld-linux-aarch64.so.1:strcmp) redirected to 0x580c4a84 (???)
+--28665-- REDIR: 0x401c6c0 (ld-linux-aarch64.so.1:index) redirected to 0x580c4a58 (???)
+--28665-- Reading syms from /usr/libexec/valgrind/vgpreload_core-arm64-linux.so
+--28665-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so
+--28665-- Reading syms from /usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33
+--28665-- Reading syms from /usr/lib/aarch64-linux-gnu/libgcc_s.so.1
+--28665-- Reading syms from /usr/lib/aarch64-linux-gnu/libc.so.6
+--28665--   Considering /usr/lib/debug/.build-id/5c/8f998f04145b99f2b808e5679fee4bb785e2a5.debug ..
+--28665--   .. build-id is valid
+--28665-- Reading syms from /usr/lib/aarch64-linux-gnu/libm.so.6
+--28665-- REDIR: 0x4c29f20 (libc.so.6:memchr) redirected to 0x485078c (_vgnU_ifunc_wrapper)
+--28665-- REDIR: 0x4c2d920 (libc.so.6:strlen) redirected to 0x485078c (_vgnU_ifunc_wrapper)
+--28665-- REDIR: 0x4c2a160 (libc.so.6:memcpy) redirected to 0x485078c (_vgnU_ifunc_wrapper)
+--28665-- REDIR: 0x4c2a960 (libc.so.6:memmove) redirected to 0x485078c (_vgnU_ifunc_wrapper)
+--28665-- REDIR: 0x4c2dec0 (libc.so.6:rindex) redirected to 0x488dd20 (rindex)
+--28665-- REDIR: 0x4c2ab80 (libc.so.6:memset) redirected to 0x485078c (_vgnU_ifunc_wrapper)
+--28665-- REDIR: 0x4c327c0 (libc.so.6:__GI_memset) redirected to 0x4892e00 (memset)
+--28665-- REDIR: 0x4c32f80 (libc.so.6:__GI_strlen) redirected to 0x488e6ec (__GI_strlen)
+--28665-- REDIR: 0x4c29f80 (libc.so.6:bcmp) redirected to 0x48924c0 (bcmp)
+--28665-- REDIR: 0x4c2dae4 (libc.so.6:strncmp) redirected to 0x488f148 (strncmp)
+--28665-- REDIR: 0x4c25c04 (libc.so.6:malloc) redirected to 0x4885400 (malloc)
+--28665-- REDIR: 0x496afc0 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4885bb0 (operator new(unsigned long))
+--28665-- REDIR: 0x4c26fc0 (libc.so.6:calloc) redirected to 0x488c540 (calloc)
+--28665-- REDIR: 0x4c2ba80 (libc.so.6:strchrnul) redirected to 0x4893a64 (strchrnul)
+--28665-- REDIR: 0x4c31380 (libc.so.6:__GI_memcpy) redirected to 0x4890ad0 (__GI_memcpy)
+--28665-- REDIR: 0x4968940 (libstdc++.so.6:operator delete(void*, unsigned long)) redirected to 0x48893c0 (operator delete(void*, unsigned long))
+--28665-- REDIR: 0x4c264c4 (libc.so.6:free) redirected to 0x48884a0 (free)
+==28665== 
+==28665== HEAP SUMMARY:
+==28665==     in use at exit: 0 bytes in 0 blocks
+==28665==   total heap usage: 17 allocs, 17 frees, 107,836 bytes allocated
+==28665== 
+==28665== All heap blocks were freed -- no leaks are possible
+==28665== 
+==28665== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

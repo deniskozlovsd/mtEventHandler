@@ -1,0 +1,18 @@
+# ninja log v6
+32	872	1736032021084114337	CMakeFiles/ehandler.dir/main.cpp.o.ddi	a47400905795c039
+872	895	1736032021923126686	CMakeFiles/ehandler.dir/EventHandler/eHandler.cpp.o.modmap	f61349bf743db6cb
+4	553	1736031467455732900	CMakeFiles/ehandler.dir/EventHandler/eHandler.cpp.o.ddi	9620b91f633299c7
+581	3680	1736031468032741982	CMakeFiles/ehandler.dir/EventHandler/eHandler.cpp.o	a5b74727a623a6bb
+9	281	1736032369760196532	build.ninja	11a2e027877ade01
+872	895	1736032021923126686	CMakeFiles/ehandler.dir/CXX.dd	f61349bf743db6cb
+872	895	1736032021923126686	CMakeFiles/ehandler.dir/main.cpp.o.modmap	f61349bf743db6cb
+872	895	1736032021923126686	/home/denis/GITEvent/mtEventHandler/CMakeFiles/ehandler.dir/CXXModules.json	f61349bf743db6cb
+2327	2419	1736032023379148116	ehandler	c59e261a87d6f134
+895	2326	1736032021946127025	CMakeFiles/ehandler.dir/main.cpp.o	3462871e35c16513
+7	587	1736032369826197486	CMakeFiles/ehandler.dir/main.cpp.o.ddi	a47400905795c039
+587	631	1736032370404205845	CMakeFiles/ehandler.dir/CXX.dd	f61349bf743db6cb
+587	631	1736032370404205845	/home/denis/GITEvent/mtEventHandler/CMakeFiles/ehandler.dir/CXXModules.json	f61349bf743db6cb
+587	631	1736032370404205845	CMakeFiles/ehandler.dir/main.cpp.o.modmap	f61349bf743db6cb
+587	631	1736032370404205845	CMakeFiles/ehandler.dir/EventHandler/eHandler.cpp.o.modmap	f61349bf743db6cb
+632	4894	1736032370449206496	CMakeFiles/ehandler.dir/main.cpp.o	3462871e35c16513
+4895	5106	1736032374712268138	ehandler	c59e261a87d6f134
