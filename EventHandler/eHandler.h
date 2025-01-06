@@ -26,7 +26,7 @@ std::vector<int> m_eventContainer {0};
 
 
 };
-extern pthread_mutex_t PMutex;
+static pthread_mutex_t PMutex = PTHREAD_MUTEX_INITIALIZER;
 extern Events event;
 
 void* eHandlerPush(void*);

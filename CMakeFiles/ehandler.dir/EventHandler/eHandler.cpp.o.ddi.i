@@ -94386,7 +94386,11 @@ std::vector<int> m_eventContainer {0};
 
 
 };
-extern pthread_mutex_t PMutex;
+static pthread_mutex_t PMutex = 
+# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h" 3 4
+                               { { 0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, { 0, 0 } } }
+# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h"
+                                                        ;
 extern Events event;
 
 void* eHandlerPush(void*);
@@ -94394,11 +94398,7 @@ void* eHandlerPop(void*);
 # 3 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 2
 
 Events event;
-pthread_mutex_t PMutex = 
-# 5 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
-                        { { 0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, { 0, 0 } } }
-# 5 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
-                                                 ;
+
 std::vector<int>* temp;
 std::vector<int>* tempVec;
 
@@ -94406,47 +94406,52 @@ std::vector<int>* tempVec;
 
 
 void* eHandlerPush(void*){
-
     int count = 0;
     while (count < 50){
-
-        pthread_mutex_lock(&PMutex);
+           if (pthread_mutex_lock(&PMutex) != 0) {
+                perror("mutex_lock");
+                exit(2);
+            }
         temp = event.getContainer();
         temp->push_back(count);
         printf("pushing %d to vector\n", count);
-
-        pthread_mutex_unlock(&PMutex);
-        usleep(40000);
-
         count++;
+          if (pthread_mutex_unlock(&PMutex) != 0) {
+                perror("pthread_mutex_unlock() error");
+                exit(2);
+            }
+        usleep(1000);
+
     }
 
     printf("Push Finished\n");
     pthread_exit(
-# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
+# 32 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
                 __null
-# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
+# 32 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
                     );
 }
 
 void* eHandlerPop(void*){
-
     int count = 0;
     while (count < 50){
 
         tempVec = event.getContainer();
         if (!tempVec->empty()){
-
-           pthread_mutex_lock(&PMutex);
+            if (pthread_mutex_lock(&PMutex) != 0) {
+                perror("mutex_lock");
+                exit(2);
+            }
             int currentInt = tempVec->back();
             printf("current front of vector is %d\n", currentInt);
             printf("\nsize of vector is %d\n", int(tempVec->size()));
             tempVec->pop_back();
-
-            pthread_mutex_unlock(&PMutex);
-
-
             count++;
+            if (pthread_mutex_unlock(&PMutex) != 0) {
+                perror("pthread_mutex_unlock() error");
+                exit(2);
+            }
+
         }
 
 
@@ -94454,9 +94459,9 @@ void* eHandlerPop(void*){
 
 printf("Pop Finished\n");
 pthread_exit(
-# 56 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
+# 61 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
             __null
-# 56 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
+# 61 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
                 );
 
 }

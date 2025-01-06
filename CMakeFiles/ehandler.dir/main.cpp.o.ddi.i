@@ -94386,7 +94386,11 @@ std::vector<int> m_eventContainer {0};
 
 
 };
-extern pthread_mutex_t PMutex;
+static pthread_mutex_t PMutex = 
+# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h" 3 4
+                               { { 0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, { 0, 0 } } }
+# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h"
+                                                        ;
 extern Events event;
 
 void* eHandlerPush(void*);
