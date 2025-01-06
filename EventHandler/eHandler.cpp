@@ -26,9 +26,11 @@ void* eHandlerPush(void*){
     }
 
     printf("Push Finished\n");
+    pthread_exit(NULL);
 }
 
 void* eHandlerPop(void*){
+  
     int count = 0;
     while (count < 50){
         
@@ -51,5 +53,6 @@ void* eHandlerPop(void*){
 }
 
 printf("Pop Finished\n");
+pthread_exit(NULL);
         
 }

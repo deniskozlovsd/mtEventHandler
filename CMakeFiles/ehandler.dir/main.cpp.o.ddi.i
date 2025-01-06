@@ -94400,26 +94400,35 @@ using namespace std;
 int main() {
 
     pthread_t pthrd1, pthrd2;
+
+    if (pthread_mutex_init(&PMutex, 
+# 12 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                                   __null
+# 12 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                                       ) == -1) {
+        cerr << "mutex_init error\n";
+        exit(2);
+    }
     if (pthread_create(&pthrd1, 
-# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+# 16 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
                                __null
-# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+# 16 "/home/denis/GITEvent/mtEventHandler/main.cpp"
                                    , eHandlerPush, 
-# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+# 16 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
                                                    __null
-# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+# 16 "/home/denis/GITEvent/mtEventHandler/main.cpp"
                                                        )!=0){
         cerr << "Failed to create Push thread\n";
         return 1;
     };
     if (pthread_create(&pthrd2, 
-# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+# 20 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
                                __null
-# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+# 20 "/home/denis/GITEvent/mtEventHandler/main.cpp"
                                    , eHandlerPop, 
-# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+# 20 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
                                                   __null
-# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+# 20 "/home/denis/GITEvent/mtEventHandler/main.cpp"
                                                       )!=0){
         cerr << "Failed to create Pop thread\n";
         return 1;
@@ -94428,16 +94437,22 @@ int main() {
 
 
 
-    pthread_join(pthrd1, 
-# 23 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
-                        __null
-# 23 "/home/denis/GITEvent/mtEventHandler/main.cpp"
-                            );
-    pthread_join(pthrd2, 
-# 24 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
-                        __null
-# 24 "/home/denis/GITEvent/mtEventHandler/main.cpp"
-                            );
+    if (pthread_join(pthrd1, 
+# 28 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                            __null
+# 28 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                                ) != 0) {
+    perror("pthread_create() error");
+    exit(3);
+  }
+    if (pthread_join(pthrd2, 
+# 32 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                            __null
+# 32 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                                ) != 0) {
+    perror("pthread_create() error");
+    exit(3);
+  }
 
 
     printf("main is done\n");

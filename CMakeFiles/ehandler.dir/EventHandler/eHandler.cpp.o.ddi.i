@@ -94422,9 +94422,15 @@ void* eHandlerPush(void*){
     }
 
     printf("Push Finished\n");
+    pthread_exit(
+# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
+                __null
+# 29 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
+                    );
 }
 
 void* eHandlerPop(void*){
+
     int count = 0;
     while (count < 50){
 
@@ -94447,5 +94453,10 @@ void* eHandlerPop(void*){
 }
 
 printf("Pop Finished\n");
+pthread_exit(
+# 56 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
+            __null
+# 56 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
+                );
 
 }
