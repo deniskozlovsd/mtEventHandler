@@ -94368,44 +94368,80 @@ namespace __detail
 
 
 
-# 12 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h"
+
+
+
+
+# 16 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h"
 class Events {
 public:
     std::vector<int>* getContainer(void){return &m_eventContainer;};
+
 
 private:
 
 std::vector<int> m_eventContainer {0};
 
-};
 
+
+
+};
+extern pthread_mutex_t PMutex;
 extern Events event;
 
-void eHandlerBody();
+void* eHandlerPush(void*);
+void* eHandlerPop(void*);
 # 3 "/home/denis/GITEvent/mtEventHandler/main.cpp" 2
 
 using namespace std;
 
-vector<int>* tempVec;
+
 
 int main() {
 
-    thread eventHandlerThread(eHandlerBody);
-    int count = 0;
-    while (count < 5000){
-        tempVec = event.getContainer();
-        if (tempVec->size()>0){
-            int currentInt = tempVec->back();
-            printf("current front of vector is %d\n", currentInt);
-            printf("\nsize of vector is %d\n", int(tempVec->size()));
-            tempVec->pop_back();
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            count++;
-        }
+    pthread_t pthrd1, pthrd2;
+    if (pthread_create(&pthrd1, 
+# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                               __null
+# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                                   , eHandlerPush, 
+# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                                                   __null
+# 11 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                                                       )!=0){
+        cerr << "Failed to create Push thread\n";
+        return 1;
+    };
+    if (pthread_create(&pthrd2, 
+# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                               __null
+# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                                   , eHandlerPop, 
+# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                                                  __null
+# 15 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                                                      )!=0){
+        cerr << "Failed to create Pop thread\n";
+        return 1;
+    };
 
-    }
 
-    eventHandlerThread.join();
+
+
+    pthread_join(pthrd1, 
+# 23 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                        __null
+# 23 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                            );
+    pthread_join(pthrd2, 
+# 24 "/home/denis/GITEvent/mtEventHandler/main.cpp" 3 4
+                        __null
+# 24 "/home/denis/GITEvent/mtEventHandler/main.cpp"
+                            );
+
+
     printf("main is done\n");
+    pthread_mutex_destroy(&PMutex);
+
     return 0;
 }

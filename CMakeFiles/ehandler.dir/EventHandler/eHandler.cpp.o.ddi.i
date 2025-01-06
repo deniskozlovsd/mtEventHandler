@@ -94368,35 +94368,84 @@ namespace __detail
 
 
 
-# 12 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h"
+
+
+
+
+# 16 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.h"
 class Events {
 public:
     std::vector<int>* getContainer(void){return &m_eventContainer;};
+
 
 private:
 
 std::vector<int> m_eventContainer {0};
 
-};
 
+
+
+};
+extern pthread_mutex_t PMutex;
 extern Events event;
 
-void eHandlerBody();
+void* eHandlerPush(void*);
+void* eHandlerPop(void*);
 # 3 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 2
 
 Events event;
+pthread_mutex_t PMutex = 
+# 5 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp" 3 4
+                        { { 0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, { 0, 0 } } }
+# 5 "/home/denis/GITEvent/mtEventHandler/EventHandler/eHandler.cpp"
+                                                 ;
 std::vector<int>* temp;
+std::vector<int>* tempVec;
 
-void eHandlerBody(){
-    temp = event.getContainer();
+
+
+
+void* eHandlerPush(void*){
+
     int count = 0;
-    while (count < 5000){
+    while (count < 50){
+
+        pthread_mutex_lock(&PMutex);
+        temp = event.getContainer();
         temp->push_back(count);
         printf("pushing %d to vector\n", count);
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        pthread_mutex_unlock(&PMutex);
+        usleep(40000);
+
         count++;
     }
 
-    printf("ehandlerThreadFinished\n");
+    printf("Push Finished\n");
+}
+
+void* eHandlerPop(void*){
+    int count = 0;
+    while (count < 50){
+
+        tempVec = event.getContainer();
+        if (!tempVec->empty()){
+
+           pthread_mutex_lock(&PMutex);
+            int currentInt = tempVec->back();
+            printf("current front of vector is %d\n", currentInt);
+            printf("\nsize of vector is %d\n", int(tempVec->size()));
+            tempVec->pop_back();
+
+            pthread_mutex_unlock(&PMutex);
+
+
+            count++;
+        }
+
+
+}
+
+printf("Pop Finished\n");
+
 }

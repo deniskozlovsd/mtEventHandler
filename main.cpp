@@ -3,26 +3,29 @@
 
 using namespace std;
 
-vector<int>* tempVec;
+
 
 int main() {
-    
-    thread eventHandlerThread(eHandlerBody);
-    int count = 0;
-    while (count < 5000){
-        tempVec = event.getContainer();
-        if (tempVec->size()>0){
-            int currentInt = tempVec->back();
-            printf("current front of vector is %d\n", currentInt);
-            printf("\nsize of vector is %d\n", int(tempVec->size()));
-            tempVec->clear();
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            count++;
-        }
-        
-    }
 
-    eventHandlerThread.join();
+    pthread_t pthrd1, pthrd2;
+    if (pthread_create(&pthrd1, NULL, eHandlerPush, NULL)!=0){
+        cerr << "Failed to create Push thread\n";
+        return 1;
+    };
+    if (pthread_create(&pthrd2, NULL, eHandlerPop, NULL)!=0){
+        cerr << "Failed to create Pop thread\n";
+        return 1;
+    };
+    //thread eventHandlerThreadPush(eHandlerPush);
+    //thread eventHandlerThreadPop(eHandlerPop);
+    
+    
+    pthread_join(pthrd1, NULL);
+    pthread_join(pthrd2, NULL);
+    //eventHandlerThreadPush.join();
+   // eventHandlerThreadPop.join();
     printf("main is done\n");
+    pthread_mutex_destroy(&PMutex);
+
     return 0;
 }
