@@ -1,0 +1,21 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "/home/denis/GITEvent/mtEventHandler",
+	"dir-cur-src" : "/home/denis/GITEvent/mtEventHandler",
+	"dir-top-bld" : "/home/denis/GITEvent/mtEventHandler",
+	"dir-top-src" : "/home/denis/GITEvent/mtEventHandler",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"EventHandler"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/denis/GITEvent/mtEventHandler/CMakeFiles/ehandler.dir"
+}
